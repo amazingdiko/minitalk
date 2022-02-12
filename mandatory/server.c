@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vitaliy <vitaliy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wmozella <wmozella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:54:03 by wmozella          #+#    #+#             */
-/*   Updated: 2022/02/11 03:43:30 by vitaliy          ###   ########.fr       */
+/*   Updated: 2022/02/12 22:20:12 by wmozella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_sigaction(int sig)
 
 int	main(int argc, char **argv)
 {
-	struct sigaction    s_sig;
+	struct sigaction	s_sig;
 
 	if (argc == 1 && argv)
 	{

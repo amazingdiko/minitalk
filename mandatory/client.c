@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmozella <wmozella@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/12 21:22:43 by wmozella          #+#    #+#             */
+/*   Updated: 2022/02/12 21:22:45 by wmozella         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "client.h"
 
 int	ft_atoi(const char	*str)
@@ -29,9 +41,9 @@ int	ft_atoi(const char	*str)
 	return (result * negative);
 }
 
-void ft_sent_message (int pid, char *str)
+void	ft_sent_message(int pid, char *str)
 {
- 	int	i;
+	int	i;
 	int	bits;
 
 	i = 0;
@@ -51,22 +63,16 @@ void ft_sent_message (int pid, char *str)
 	}
 }
 
-// void ft_aprove_massage (int pid)
-// {
-// 	if (pid == SIGUSR1)
-// 		ft_printf("Signal recieved\n");
-// }
-
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    int pid;
+	int	pid;
 
 	if (argc < 3)
 		ft_printf("Write a PID and a message.\n");
-    if (argc == 3)
-    {
-        pid = ft_atoi(argv[1]);
-        ft_sent_message(pid, argv[2]);
-    }
-    return (0);
+	if (argc == 3)
+	{
+		pid = ft_atoi(argv[1]);
+		ft_sent_message(pid, argv[2]);
+	}
+	return (0);
 }

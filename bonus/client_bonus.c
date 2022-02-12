@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmozella <wmozella@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/12 21:13:24 by wmozella          #+#    #+#             */
+/*   Updated: 2022/02/12 22:13:19 by wmozella         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "client_bonus.h"
 
 int	ft_atoi(const char	*str)
@@ -29,7 +41,14 @@ int	ft_atoi(const char	*str)
 	return (result * negative);
 }
 
-void ft_sent_message (int pid, char *str)
+void	ft_aprove_message(int sig, siginfo_t *test1, void *test)
+{
+	if (sig == SIGUSR1)
+		write (1, "Message recieved\n", 17);
+	usleep (200);
+}
+
+void	ft_sent_message(int pid, char *str)
 {
 	int	i;
 	int	bit;
@@ -45,37 +64,26 @@ void ft_sent_message (int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			bit--;
-			usleep(400);
+			usleep(300);
 		}
 		i++;
 	}
 }
 
-int ft_aprove_massage(int sig)
+int	main(int argc, char **argv)
 {
-	if (sig == SIGUSR1)
-		return (1);
-	else
-		return (0);
-}
+	struct sigaction	s_sig;
+	int					pid;
 
-int main(int argc, char **argv)
-{
-	struct sigaction s_sig;
-    int pid;
-	int	sig;
-	
 	if (argc < 3)
 		ft_printf("Write a PID and a message.\n");
-    if (argc == 3)
-    {
+	if (argc == 3)
+	{
 		s_sig.sa_flags = SA_SIGINFO;
+		s_sig.sa_sigaction = ft_aprove_message;
 		sigaction(SIGUSR1, &s_sig, 0);
-		s_sig.sa_handler = (void *)ft_aprove_massage;
-		if (ft_aprove_massage == 1)
-			ft_printf("Signal recieved.\n");
-        pid = ft_atoi(argv[1]);
-        ft_sent_message(pid, argv[2]);
+		pid = ft_atoi(argv[1]);
+		ft_sent_message(pid, argv[2]);
 	}
-    return (0);
+	return (0);
 }
